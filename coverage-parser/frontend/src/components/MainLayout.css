@@ -1,0 +1,65 @@
+/* Logo容器 - 参考zhichu1 */
+.logo-container {
+  padding: 24px 16px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: hsl(220 20% 20%);
+  letter-spacing: 0;
+}
+
+/* 侧边栏菜单样式 - 完全参考zhichu1标准 */
+.sidebar-menu {
+  padding: 16px 16px !important;
+}
+
+.sidebar-menu .ant-menu-item {
+  height: auto;
+  line-height: normal;
+  margin: 4px 0;
+  padding: 12px 16px !important;
+  border-radius: 9999px !important; /* rounded-full */
+  color: hsl(220 15% 30%); /* sidebar-foreground */
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+}
+
+.sidebar-menu .ant-menu-item:hover {
+  background: hsl(186 71% 96%) !important; /* sidebar-accent */
+  color: hsl(187 99% 35%) !important; /* sidebar-accent-foreground */
+}
+
+/* 选中状态 - zhichu1标准：青蓝色背景+白色文字+轻微阴影 */
+.sidebar-menu .ant-menu-item-selected {
+  background: #01BCD6 !important; /* bg-primary */
+  color: white !important; /* text-primary-foreground */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important; /* shadow-sm */
+}
+
+.sidebar-menu .ant-menu-item-selected::after {
+  display: none;
+}
+
+.sidebar-menu .ant-menu-item .anticon {
+  font-size: 16px;
+  margin-right: 12px;
+  color: inherit;
+}
+

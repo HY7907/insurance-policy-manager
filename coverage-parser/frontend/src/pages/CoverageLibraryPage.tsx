@@ -840,65 +840,41 @@ export default function CoverageLibraryPage() {
   }
 
   return (
-    <div style={{ padding: '24px', background: '#f0f2f5', minHeight: '100vh' }}>
-      <Card>
-        {/* 页面标题 - 与智能录入页面样式一致 */}
-        <div style={{ 
-          background: 'white',
-          color: '#333',
-          padding: '30px 30px 20px 30px',
-          textAlign: 'center',
-          position: 'relative',
-          marginBottom: 24
+    <div style={{ minHeight: '100vh', padding: '24px' }}>
+      {/* 顶部标题区域 */}
+      <div style={{
+        maxWidth: '1400px',
+        margin: '0 auto',
+        marginBottom: '32px'
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '16px',
+          justifyContent: 'space-between'
         }}>
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault()
-              navigate('/')
-            }}
-            style={{
-              position: 'absolute',
-              left: '30px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: '#f5f5f5',
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px',
-              padding: '8px 16px',
-              cursor: 'pointer',
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
+            <h1 style={{
+              fontSize: '30px',
+              fontWeight: 700,
+              color: '#1f2937',
+              margin: 0
+            }}>
+              责任库管理系统
+            </h1>
+            <p style={{
               fontSize: '14px',
-              color: '#333',
-              display: 'inline-block',
-              textDecoration: 'none',
-              transition: 'all 0.3s'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#e8e8e8'
-              e.currentTarget.style.borderColor = '#01BCD6'
-              e.currentTarget.style.color = '#01BCD6'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#f5f5f5'
-              e.currentTarget.style.borderColor = '#e0e0e0'
-              e.currentTarget.style.color = '#333'
-            }}
-          >
-            ← 返回
-          </a>
-          <h1 style={{ 
-            fontSize: '28px',
-            marginBottom: 0,
-            color: '#333'
-          }}>
-            责任库管理系统
-          </h1>
-          {/* 导入、导出按钮放在右上角 */}
+              color: '#6b7280',
+              margin: 0,
+              fontWeight: 400
+            }}>
+              统一管理和查询所有保险责任
+            </p>
+          </div>
+          {/* 导入、导出按钮 */}
           <div style={{
-            position: 'absolute',
-            right: '30px',
-            top: '50%',
-            transform: 'translateY(-50%)'
+            display: 'flex',
+            gap: '8px'
           }}>
             <Space>
               <Button icon={<ImportOutlined />}>导入</Button>
@@ -907,15 +883,24 @@ export default function CoverageLibraryPage() {
           </div>
         </div>
 
+      </div>
+
+      {/* 主内容区域 */}
+      <div style={{
+        maxWidth: '1400px',
+        margin: '0 auto'
+      }}>
         {/* 合并的统计框 - 包含顶部统计栏和四个卡片 */}
         <Card
           style={{
             marginBottom: 24,
-            borderRadius: '8px',
-            border: '1px solid #d9f7f7',
-            background: '#f0f8fc'
+            borderRadius: '12px',
+            border: 'none',
+            background: 'rgba(255, 255, 255, 0.7)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)'
           }}
-          bodyStyle={{ padding: '20px 24px', background: '#f0f8fc' }}
+          bodyStyle={{ padding: '20px 24px' }}
         >
           {/* 顶部统计栏 */}
           <div style={{ 
@@ -1165,6 +1150,13 @@ export default function CoverageLibraryPage() {
         </Card>
 
         {/* 数据表格 */}
+        <Card style={{
+          borderRadius: '12px',
+          border: 'none',
+          background: 'rgba(255, 255, 255, 0.7)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)'
+        }}>
         <Table
           columns={columns}
           dataSource={data}
@@ -1183,14 +1175,15 @@ export default function CoverageLibraryPage() {
             }
           }}
         />
-      </Card>
+        </Card>
 
-      {/* 详情弹窗 */}
-      <CoverageDetailModal
-        visible={detailVisible}
-        item={selectedItem}
-        onClose={() => setDetailVisible(false)}
-      />
+        {/* 详情弹窗 */}
+        <CoverageDetailModal
+          visible={detailVisible}
+          item={selectedItem}
+          onClose={() => setDetailVisible(false)}
+        />
+      </div>
     </div>
   )
 }

@@ -1575,78 +1575,54 @@ export default function SmartInputPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f5f5f5', padding: '20px' }}>
-      {/* HTML原版的container结构 */}
+    <div style={{ minHeight: '100vh', padding: '24px' }}>
+      {/* 顶部标题区域 - 参考我家的保单 */}
       <div style={{ 
-        maxWidth: '1200px',
+        maxWidth: '1400px',
         margin: '0 auto',
-        background: 'white',
-        borderRadius: '8px',
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
-        overflow: 'hidden'
+        marginBottom: '32px'
       }}>
-        {/* 页面标题 */}
         <div style={{ 
-          background: 'white',
-          color: '#333',
-          padding: '30px 30px 20px 30px',
-          textAlign: 'center',
-          position: 'relative'
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '16px'
         }}>
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault()
-              navigate('/')
-            }}
-            style={{
-              position: 'absolute',
-              left: '30px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: '#f5f5f5',
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px',
-              padding: '8px 16px',
-              cursor: 'pointer',
-              fontSize: '14px',
-              color: '#333',
-              display: 'inline-block',
-              textDecoration: 'none',
-              transition: 'all 0.3s'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#e8e8e8'
-              e.currentTarget.style.borderColor = '#01BCD6'
-              e.currentTarget.style.color = '#01BCD6'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#f5f5f5'
-              e.currentTarget.style.borderColor = '#e0e0e0'
-              e.currentTarget.style.color = '#333'
-            }}
-          >
-            ← 返回
-          </a>
           <h1 style={{ 
-            fontSize: '28px',
-            marginBottom: 0,
-            color: '#333'
+            fontSize: '30px',
+            fontWeight: 700,
+            color: '#1f2937',
+            margin: 0
           }}>
-            保险智能录入解析助手
+            保单智能录入解析
           </h1>
+          <p style={{
+            fontSize: '14px',
+            color: '#6b7280',
+            margin: 0,
+            fontWeight: 400
+          }}>
+            快速录入保单信息，智能解析保障责任
+          </p>
         </div>
+        </div>
+
+      {/* 主内容区域 */}
+      <div style={{
+        maxWidth: '1400px',
+        margin: '0 auto'
+      }}>
 
         {/* 左右两栏布局 */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: '30px',
-          padding: '30px'
+          gap: '24px'
         }}>
           {/* 左侧：输入区域 */}
           <div style={{
-            background: 'white',
+            background: 'rgba(255, 255, 255, 0.7)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             borderRadius: '12px',
             padding: '24px',
             border: '2px solid #01BCD6'
@@ -2203,7 +2179,9 @@ export default function SmartInputPage() {
 
           {/* 右侧：解析结果 */}
           <div style={{
-            background: 'white',
+            background: 'rgba(255, 255, 255, 0.7)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             borderRadius: '12px',
             padding: '24px',
             border: '2px solid #01BCD6'

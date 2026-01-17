@@ -11,8 +11,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <ConfigProvider locale={zhCN} theme={{
         token: {
-          colorPrimary: '#5FC8D4',
-          borderRadius: 6,
+          colorPrimary: '#01BCD6',
+          borderRadius: 8,
+          colorBgContainer: '#ffffff',
+          colorBorder: 'hsl(210 20% 92%)',
         },
       }}>
         <App />

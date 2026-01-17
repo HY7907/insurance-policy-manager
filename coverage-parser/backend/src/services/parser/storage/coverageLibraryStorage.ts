@@ -338,7 +338,7 @@ export class CoverageLibraryStorage {
   private enrichCoverageData(item: any): any {
     try {
       const parsedResult = (item.parsedResult || {}) as any;
-      
+
       // 优先使用数据库列（提升性能）
       let 赔付次数 = item.payoutCount;
       let 是否可以重复赔付 = item.isRepeatablePayout;
@@ -374,7 +374,7 @@ export class CoverageLibraryStorage {
       
       // 判断是否为单次赔付
       const isSinglePayout = 赔付次数 === '1次';
-      
+
       return {
         ...item,
         序号: parsedResult?.序号,
@@ -592,8 +592,8 @@ export class CoverageLibraryStorage {
     try {
       console.log('开始查询数据库，where条件:', JSON.stringify(where));
       allData = await prisma.insuranceCoverageLibrary.findMany({
-        where,
-        include: {
+      where,
+      include: {
           product: {
             select: {
               id: true,
@@ -605,8 +605,8 @@ export class CoverageLibraryStorage {
         },
         orderBy: {
           createdAt: 'desc'
-        }
-      });
+      }
+    });
       console.log(`数据库查询成功，获取到 ${allData.length} 条记录`);
     } catch (dbError: any) {
       console.error('数据库查询失败:', dbError);

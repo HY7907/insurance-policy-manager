@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Modal, message } from 'antd'
-import { PlusOutlined, EditOutlined, DeleteOutlined, DatabaseOutlined } from '@ant-design/icons'
+import { PlusOutlined, DatabaseOutlined } from '@ant-design/icons'
 import { getPolicies, removePolicy } from '@/services/api'
 import type { Policy } from '@/types'
+
+console.log('💎💎💎 版本 7.0 - 印章优化（上移+字小+强化毛玻璃+多重阴影）💎💎💎')
 
 // 家庭成员图标配置
 const FAMILY_MEMBERS = [
@@ -97,93 +99,64 @@ export default function PolicyManagerHomePage() {
   const displayPolicies = getFilteredPolicies()
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f5f5f5', padding: '20px' }}>
-      {/* HTML原版的container结构 */}
+    <div style={{ minHeight: '100vh', padding: '24px' }}>
+      {/* 顶部标题区域 - 参考zhichu1 */}
       <div style={{ 
-        maxWidth: '1200px',
+        maxWidth: '1400px',
         margin: '0 auto',
-        background: 'white',
-        borderRadius: '8px',
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
-        overflow: 'hidden'
+        marginBottom: '32px'
       }}>
-        {/* 导航栏 */}
         <div style={{ 
-          background: '#001529',
-          padding: '0 30px',
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          height: '64px'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-            <h1 style={{ 
-              fontSize: '20px',
-              margin: 0,
-              color: 'white',
-              fontWeight: 500
-            }}>
-              保险解析助手
-            </h1>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div
-              onClick={() => navigate('/coverage-library')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '8px 16px',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                color: 'white',
-                transition: 'background 0.3s'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent'
-              }}
-            >
-              <DatabaseOutlined />
-              <span>责任库</span>
-            </div>
-          </div>
-        </div>
-
-        {/* 页面标题 */}
-        <div style={{ 
-          background: 'white',
-          color: '#333',
-          padding: '30px 30px 20px 30px',
-          textAlign: 'center',
-          position: 'relative'
+          alignItems: 'baseline',
+          gap: '16px'
         }}>
           <h1 style={{ 
-            fontSize: '28px',
-            marginBottom: 0,
-            color: '#333'
+            fontSize: '30px',
+            fontWeight: 700,
+            color: '#1f2937',
+            margin: 0
           }}>
-            家庭保单管家
+            我家的保单
           </h1>
+          <p style={{
+            fontSize: '14px',
+            color: '#6b7280',
+            margin: 0,
+            fontWeight: 400
+          }}>
+            全方位保单管理，助力美好未来
+          </p>
+        </div>
         </div>
 
         {/* 保单卡片容器 */}
-        <div style={{ padding: '20px 30px 30px 30px' }}>
-          {/* 家庭成员统计 */}
-          <div style={{ marginBottom: '20px', padding: 0 }}>
+      <div style={{ 
+        maxWidth: '1400px',
+        margin: '0 auto'
+      }}>
+          {/* 家庭成员统计卡片 */}
+          <div style={{ 
+            marginBottom: '24px',
+            background: 'rgba(255, 255, 255, 0.7)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            borderRadius: '16px',
+            padding: '16px 24px',
+            boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.08)',
+            border: '1px solid rgba(255, 255, 255, 0.7)'
+          }}>
             <div style={{ 
               display: 'flex', 
-              alignItems: 'center',
-              gap: '8px',
-              overflowX: 'auto',
-              padding: '8px 0',
-              background: 'transparent'
+              alignItems: 'flex-end',
+              gap: '48px',
+              overflowX: 'auto'
             }}>
               {displayMembers.map(member => {
                 const count = member.key === 'all' ? total : (stats[member.key] || 0)
                 const isSelected = member.key === 'all' ? !filteredMember : filteredMember === member.key
+                const isFamily = member.key === 'all'
+                const imgSize = isFamily ? 120 : 90
                 
                 return (
                   <div
@@ -194,76 +167,78 @@ export default function PolicyManagerHomePage() {
                       flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'flex-start',
-                      width: '120px',
-                      padding: '0 3px',
+                      width: `${imgSize}px`,
+                      padding: '0',
                       border: 'none',
                       borderRadius: '0',
-                      background: isSelected ? 'rgba(230, 247, 255, 1)' : 'transparent',
+                      background: 'transparent',
                       transition: 'all 0.3s',
                       cursor: 'pointer',
-                      position: 'relative',
-                      boxSizing: 'border-box',
-                      boxShadow: isSelected ? '0 2px 8px rgba(1, 188, 214, 0.2)' : 'none'
-                    }}
-                    onMouseEnter={(e) => {
-                      // 不显示边框，保持透明
-                    }}
-                    onMouseLeave={(e) => {
-                      // 不显示边框，保持透明
+                      position: 'relative'
                     }}
                   >
+                    {/* 标签在图片上方 */}
+                    <div style={{
+                      fontSize: isFamily ? '14px' : '12px',
+                      color: '#6b7280',
+                      marginBottom: '8px',
+                      textAlign: 'center'
+                    }}>
+                      {member.label}
+                    </div>
+                    
+                    {/* 图片 */}
                     <div style={{ 
                       position: 'relative',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      width: '120px',
-                      height: '120px',
+                      width: `${imgSize}px`,
+                      height: `${imgSize}px`,
                       flexShrink: 0
                     }}>
                       {member.isImage ? (
+                        <div style={{
+                          width: `${imgSize}px`,
+                          height: `${imgSize}px`,
+                          borderRadius: isFamily ? '16px' : '12px',
+                          overflow: 'hidden'
+                        }}>
                         <img 
                           src={member.icon} 
                           alt={member.label}
                           style={{ 
-                            width: '120px',
-                            height: '120px',
-                            objectFit: 'contain',
-                            display: 'block',
-                            imageRendering: 'auto'
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              display: 'block'
                           }}
                           onError={(e) => console.error(`${member.label}图片加载失败`, e)}
                         />
+                        </div>
                       ) : (
-                        <div style={{ fontSize: '40px', lineHeight: '1' }}>{member.icon}</div>
+                        <div style={{ 
+                          fontSize: isFamily ? '50px' : '35px', 
+                          lineHeight: '1',
+                          width: `${imgSize}px`,
+                          height: `${imgSize}px`,
+                          borderRadius: isFamily ? '16px' : '12px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }}>{member.icon}</div>
                       )}
-                      <div style={{
-                        position: 'absolute',
-                        top: '8px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        fontSize: '12px',
-                        color: '#666',
-                        textAlign: 'center',
-                        lineHeight: '1',
-                        whiteSpace: 'nowrap'
-                      }}>
-                        {member.label}
                       </div>
+                    
+                    {/* 数字在图片下方 */}
                       <div style={{
-                        position: 'absolute',
-                        bottom: '-2px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        fontSize: '14px',
+                      fontSize: isFamily ? '18px' : '16px',
                         fontWeight: 600,
-                        color: '#333',
-                        textAlign: 'center',
-                        lineHeight: '1',
-                        whiteSpace: 'nowrap'
+                      color: isSelected ? '#01BCD6' : '#333',
+                      marginTop: '8px',
+                      textAlign: 'center'
                       }}>
                         {count}份
-                      </div>
                     </div>
                   </div>
                 )
@@ -277,48 +252,23 @@ export default function PolicyManagerHomePage() {
             gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
             gap: '20px'
           }}>
-            {/* 添加新合同卡片 */}
-            <div
-              onClick={() => navigate('/smart-input')}
-              style={{
-                background: 'white',
-                borderRadius: '12px',
-                padding: '40px 20px',
-                border: '2px dashed #01BCD6',
-                cursor: 'pointer',
-                transition: 'all 0.3s',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: '280px'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#01BCD6'
-                e.currentTarget.style.background = '#f0f8fc'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#01BCD6'
-                e.currentTarget.style.background = 'white'
-              }}
-            >
-              <PlusOutlined style={{ fontSize: '48px', color: '#01BCD6', marginBottom: '16px' }} />
-              <div style={{ fontSize: '16px', fontWeight: 600, color: '#01BCD6' }}>
-                添加新合同
-              </div>
-            </div>
-
             {/* 保单卡片 */}
-            {displayPolicies.map(policy => (
+            {displayPolicies.map(policy => {
+              const currentYear = new Date().getFullYear()
+              const endYear = policy.coverageEndYear || policy.policyInfo?.coverageEndYear
+              const isActive = !endYear || endYear === '终身' || parseInt(endYear) >= currentYear
+              
+              return (
               <div
                 key={policy.id}
                 style={{
+                  position: 'relative',
                   background: 'white',
                   borderRadius: '12px',
-                  padding: '20px',
-                  border: '2px solid #e0e0e0',
+                  padding: '16px',
+                  border: '1px solid #f3f4f6',
+                  boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
                   transition: 'all 0.3s',
-                  minHeight: '280px',
                   display: 'flex',
                   flexDirection: 'column',
                   cursor: 'default'
@@ -334,23 +284,96 @@ export default function PolicyManagerHomePage() {
                   e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
-                {/* 标题和类型标签 */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
-                  <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 600, color: '#333', flex: 1 }}>
-                    {policy.productName}
-                  </h3>
-                  <span style={{
-                    background: '#f0f8fc',
-                    color: '#01BCD6',
-                    padding: '4px 12px',
-                    borderRadius: '12px',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                    marginLeft: '8px',
-                    whiteSpace: 'nowrap'
-                  }}>
-                    {POLICY_TYPE_MAP[policy.policyType] || policy.policyType}
-                  </span>
+                {/* 左上角圆形印章 - 叠加盖章效果 */}
+                <div style={{
+                  position: 'absolute',
+                  top: '-20px',
+                  left: '-20px',
+                  width: '55px',
+                  height: '55px',
+                  borderRadius: '50%',
+                  background: isActive ? 'rgba(22, 163, 74, 0.1)' : 'rgba(220, 38, 38, 0.1)',
+                  backdropFilter: 'blur(12px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+                  border: `0.5px solid ${isActive ? '#16a34a' : '#dc2626'}`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: isActive ? '#16a34a' : '#dc2626',
+                  fontSize: '15px',
+                  fontWeight: 800,
+                  boxShadow: '0 6px 16px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2)',
+                  zIndex: 10,
+                  transform: 'rotate(-15deg)',
+                  letterSpacing: '1px'
+                }}>
+                  {isActive ? '有效' : '失效'}
+                </div>
+
+                {/* 标题栏：保险名称 + 类型标签 */}
+                <div style={{ marginBottom: '12px', paddingBottom: '12px', borderBottom: '1px solid #01BCD6', marginTop: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+                    {/* 左侧：保险名称 + 类型标签 */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 600, color: '#333' }}>
+                        {policy.productName}
+                      </h3>
+                      <span style={{
+                        background: '#f0f8fc',
+                        color: '#01BCD6',
+                        padding: '4px 12px',
+                        borderRadius: '12px',
+                        fontSize: '12px',
+                        fontWeight: 600,
+                        whiteSpace: 'nowrap',
+                        lineHeight: '1.5',
+                        display: 'inline-block'
+                      }}>
+                        {POLICY_TYPE_MAP[policy.policyType] || policy.policyType}
+                      </span>
+                    </div>
+                    
+                    {/* 右侧：编辑删除图标按钮，与标签底部对齐 */}
+                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                      <span
+                        onClick={() => navigate(`/smart-input?editId=${policy.id}`)}
+                        style={{
+                          cursor: 'pointer',
+                          fontSize: '18px',
+                          color: '#01BCD6',
+                          transition: 'all 0.3s'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = '#00a8bd'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = '#01BCD6'
+                        }}
+                      >
+                        ✏️
+                      </span>
+                      <span
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleDelete(policy.id!)
+                        }}
+                        style={{
+                          cursor: 'pointer',
+                          fontSize: '18px',
+                          color: '#ff4d4f',
+                          transition: 'all 0.3s'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = '#d43f3f'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = '#ff4d4f'
+                        }}
+                      >
+                        🗑️
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* 保单信息 */}
@@ -428,66 +451,14 @@ export default function PolicyManagerHomePage() {
                       })()
                     }</div>
                   </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px' }}>
+                    <div><strong>保障责任：</strong>{policy.coverages?.length || 0}项</div>
                   <div><strong>基本保额：</strong>{((policy.basicSumInsured || policy.policyInfo?.basicSumInsured || 0) / 10000).toFixed(2)}万元</div>
-                  <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #f0f0f0' }}>
-                    <strong>保障责任：</strong>{policy.coverages?.length || 0}项
                   </div>
                 </div>
-
-                {/* 操作按钮 */}
-                <div style={{ display: 'flex', gap: '8px', marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #f0f0f0' }}>
-                  <button
-                    onClick={() => navigate(`/smart-input?editId=${policy.id}`)}
-                    style={{
-                      flex: 1,
-                      padding: '8px 16px',
-                      border: '1px solid #01BCD6',
-                      background: 'white',
-                      color: '#01BCD6',
-                      borderRadius: '6px',
-                      cursor: 'pointer',
-                      fontSize: '14px',
-                      fontWeight: 600,
-                      transition: 'all 0.3s'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#f0f8fc'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'white'
-                    }}
-                  >
-                    <EditOutlined /> 编辑
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      handleDelete(policy.id!)
-                    }}
-                    style={{
-                      flex: 1,
-                      padding: '8px 16px',
-                      border: '1px solid #ff4d4f',
-                      background: 'white',
-                      color: '#ff4d4f',
-                      borderRadius: '6px',
-                      cursor: 'pointer',
-                      fontSize: '14px',
-                      fontWeight: 600,
-                      transition: 'all 0.3s'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#fff1f0'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'white'
-                    }}
-                  >
-                    <DeleteOutlined /> 删除
-                  </button>
-                </div>
               </div>
-            ))}
+              )
+            })}
           </div>
 
           {/* 空状态 */}
@@ -499,11 +470,10 @@ export default function PolicyManagerHomePage() {
             }}>
               <div style={{ fontSize: '48px', marginBottom: '16px' }}>📋</div>
               <div style={{ fontSize: '16px' }}>
-                {filteredMember ? '该成员暂无保单' : '暂无保单，点击上方"添加新合同"开始录入'}
+                {filteredMember ? '该成员暂无保单' : '暂无保单，点击左侧"保单智能录入"开始录入'}
               </div>
             </div>
           )}
-        </div>
       </div>
     </div>
   )

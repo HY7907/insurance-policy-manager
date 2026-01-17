@@ -1,6 +1,6 @@
 import { Card } from 'antd'
 
-export default function ProductLibraryPage() {
+export default function DiagnosisPage() {
   return (
     <div style={{ minHeight: '100vh', padding: '24px' }}>
       {/* 顶部标题区域 - 参考我家的保单 */}
@@ -20,7 +20,7 @@ export default function ProductLibraryPage() {
             color: '#1f2937',
             margin: 0
           }}>
-            保险产品库
+            家庭保障诊断
           </h1>
           <p style={{
             fontSize: '14px',
@@ -28,7 +28,7 @@ export default function ProductLibraryPage() {
             margin: 0,
             fontWeight: 400
           }}>
-            管理和查询保险产品信息
+            全面分析家庭保障状况，提供专业建议
           </p>
         </div>
       </div>
@@ -53,3 +53,5 @@ export default function ProductLibraryPage() {
     </div>
   )
 }
+
+

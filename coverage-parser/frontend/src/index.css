@@ -5,14 +5,19 @@
 }
 
 :root {
-  /* HTML原有配色方案 */
-  --primary-color: #5FC8D4;
-  --border-color: #9FE8ED;
+  /* zhichu1统一配色方案 - 主色调青蓝色 #01BCD6 */
+  --primary-color: #01BCD6;
+  --border-color: hsl(210 20% 92%);
   --bg-light: #E6F7FF;
   --bg-light-alt: #f0f8fc;
-  --text-primary: #374151;
+  --text-primary: hsl(220 20% 20%);
   --text-secondary: #666;
   --text-muted: #999;
+  
+  /* zhichu1辅助色 */
+  --secondary-color: #CAF4F7;
+  --accent-color: hsl(186 71% 94%);
+  --background: hsl(210 20% 98%);
 }
 
 body {
@@ -20,7 +25,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f5f5f5;
+  background: hsl(210 20% 98%);
+  color: hsl(220 20% 20%);
 }
 
 code {
