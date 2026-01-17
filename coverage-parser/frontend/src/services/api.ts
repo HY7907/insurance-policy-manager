@@ -203,7 +203,7 @@ export async function getCoverageLibrary(filters?: {
   unverified: number
 }> {
   // 注意：响应拦截器已经返回了response.data，所以这里response就是后端返回的对象
-  const response = await api.get<any>('/coverage-library', {
+  const response: any = await api.get('/coverage-library', {
     params: filters
   })
   
@@ -305,12 +305,7 @@ export async function getCoverageLibraryStats(policyId?: string): Promise<{
     年金责任: { total: number; verified: number; unverified: number }
   }
 }> {
-  const response = await api.get<ApiResponse<{
-    total: number
-    verified: number
-    unverified: number
-    byType: any
-  }>>('/coverage-library/stats', {
+  const response: any = await api.get('/coverage-library/stats', {
     params: policyId ? { policyId } : {}
   })
   if (response.success && response.data) {
@@ -327,11 +322,7 @@ export async function getContractStats(): Promise<{
   totalCoverageCount: number
   policyIds: string[]
 }> {
-  const response = await api.get<ApiResponse<{
-    contractCount: number
-    totalCoverageCount: number
-    policyIds: string[]
-  }>>('/coverage-library/contract-stats')
+  const response: any = await api.get('/coverage-library/contract-stats')
   if (response.success && response.data) {
     return response.data
   }

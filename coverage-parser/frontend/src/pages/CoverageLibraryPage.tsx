@@ -842,11 +842,11 @@ export default function CoverageLibraryPage() {
   return (
     <div style={{ minHeight: '100vh', padding: '24px' }}>
       {/* 顶部标题区域 */}
-      <div style={{
+        <div style={{ 
         maxWidth: '1400px',
         margin: '0 auto',
         marginBottom: '32px'
-      }}>
+        }}>
         <div style={{
           display: 'flex',
           alignItems: 'baseline',
@@ -854,14 +854,14 @@ export default function CoverageLibraryPage() {
           justifyContent: 'space-between'
         }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
-            <h1 style={{
+          <h1 style={{ 
               fontSize: '30px',
               fontWeight: 700,
               color: '#1f2937',
               margin: 0
-            }}>
-              责任库管理系统
-            </h1>
+          }}>
+            责任库管理系统
+          </h1>
             <p style={{
               fontSize: '14px',
               color: '#6b7280',
@@ -1175,14 +1175,14 @@ export default function CoverageLibraryPage() {
             }
           }}
         />
-        </Card>
+      </Card>
 
-        {/* 详情弹窗 */}
-        <CoverageDetailModal
-          visible={detailVisible}
-          item={selectedItem}
-          onClose={() => setDetailVisible(false)}
-        />
+      {/* 详情弹窗 */}
+      <CoverageDetailModal
+        visible={detailVisible}
+        item={selectedItem}
+        onClose={() => setDetailVisible(false)}
+      />
       </div>
     </div>
   )
