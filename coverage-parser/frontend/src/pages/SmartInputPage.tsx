@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { message, Modal } from 'antd'
-import { ArrowLeftOutlined } from '@ant-design/icons'
-import { parseCoverage, addPolicy, editPolicy, getPolicies, getPolicyById } from '@/services/api'
+import { parseCoverage, addPolicy, editPolicy, getPolicyById } from '@/services/api'
 import type { Coverage, PolicyInfo } from '@/types'
 import InsuranceCompanySelector from '@/components/InsuranceCompanySelector'
 
@@ -255,8 +254,6 @@ function OtherFieldDisplay({
     confidence = 0.3
   }
   
-  const confidenceClass = confidence >= 0.8 ? 'confidence-high' : 
-                         confidence >= 0.5 ? 'confidence-medium' : 'confidence-low'
   const confidenceText = confidence >= 0.8 ? '高' : 
                         confidence >= 0.5 ? '中' : '低'
   const extractedText = typeof data === 'object' ? data?.extractedText : undefined
@@ -1041,7 +1038,6 @@ export default function SmartInputPage() {
   const currentYear = new Date().getFullYear()
   const maxStartYear = 2026 // 投保开始年份最大为2026年
   const defaultBirthYear = 2000
-  const defaultEndYear = defaultBirthYear + 100 // 被保险人100岁对应的年份
   
   const [insuranceCompany, setInsuranceCompany] = useState('')
   const [policyType, setPolicyType] = useState('critical_illness')
@@ -1297,7 +1293,7 @@ export default function SmartInputPage() {
         coverageEndYear: coverageEndYear === 'lifetime' ? 'lifetime' : parseInt(coverageEndYear),
         basicSumInsured: parseFloat(basicSumInsured) * 10000,
         annualPremium: parseFloat(annualPremium),
-        totalPaymentPeriod: totalPaymentPeriod === 'lifetime' ? 'lifetime' : parseInt(totalPaymentPeriod),
+        totalPaymentPeriod: totalPaymentPeriod === 'lifetime' ? 'lifetime' : String(parseInt(totalPaymentPeriod)),
       }
 
       const result = await parseCoverage(clauseText, selectedCoverageType, policyInfo)

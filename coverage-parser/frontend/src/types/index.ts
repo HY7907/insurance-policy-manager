@@ -110,8 +110,17 @@ export interface Policy {
   insuranceCompany: string
   productName: string
   insuredPerson: string
+  policyType?: string
   policyInfo: PolicyInfo
   coverages: Coverage[]
+  // 以下字段是为了兼容性，允许直接在顶层访问
+  birthYear?: number
+  policyStartYear?: number
+  coverageEndYear?: number | 'lifetime' | string
+  totalPaymentPeriod?: number | string
+  paymentPeriod?: number | string
+  annualPremium?: number
+  basicSumInsured?: number
   createdAt?: Date
   updatedAt?: Date
 }
