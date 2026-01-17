@@ -7,17 +7,13 @@ import {
   Button, 
   Tag, 
   Space, 
-  Modal, 
   message,
-  Statistic,
   Row,
   Col,
-  Tooltip,
-  Tabs
+  Tooltip
 } from 'antd'
 import {
   SearchOutlined,
-  ReloadOutlined,
   ExportOutlined,
   ImportOutlined,
   EyeOutlined,

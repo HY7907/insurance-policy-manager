@@ -1,4 +1,4 @@
-import { Modal, Card, Collapse, Typography, Space, Switch } from 'antd'
+import { Modal, Card, Typography, Space, Switch } from 'antd'
 import { useState } from 'react'
 
 const { Text, Paragraph } = Typography

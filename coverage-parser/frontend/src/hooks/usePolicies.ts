@@ -42,7 +42,7 @@ export function usePolicies() {
   const editPolicy = async (id: string, updates: Partial<Policy>) => {
     try {
       setLoading(true)
-      const updatedPolicy = await updatePolicy(id, updates)
+      const updatedPolicy = await updatePolicy(Number(id), updates)
       setPolicies(policies.map(p => p.id === id ? updatedPolicy : p))
       message.success('保单已更新')
       return updatedPolicy
@@ -59,7 +59,7 @@ export function usePolicies() {
   const removePolicy = async (id: string) => {
     try {
       setLoading(true)
-      await deletePolicy(id)
+      await deletePolicy(Number(id))
       setPolicies(policies.filter(p => p.id !== id))
       message.success('保单已删除')
     } catch (error: any) {

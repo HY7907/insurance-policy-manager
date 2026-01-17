@@ -538,7 +538,7 @@ export default function PolicyListPage() {
                     <Text strong>{coverage.name}</Text>
                     <Tag color="blue">{coverage.type}</Tag>
                     <Text type="secondary">
-                      置信度: {(coverage.result.overallConfidence * 100).toFixed(0)}%
+                      置信度: {((coverage.result.overallConfidence ?? 0) * 100).toFixed(0)}%
                     </Text>
                   </Space>
                 </Card>
