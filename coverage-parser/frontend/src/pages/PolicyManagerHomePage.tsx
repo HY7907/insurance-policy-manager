@@ -255,7 +255,7 @@ export default function PolicyManagerHomePage() {
             {displayPolicies.map(policy => {
               const currentYear = new Date().getFullYear()
               const endYear = policy.coverageEndYear || policy.policyInfo?.coverageEndYear
-              const isActive = !endYear || endYear === '终身' || parseInt(endYear) >= currentYear
+              const isActive = !endYear || endYear === '终身' || parseInt(String(endYear)) >= currentYear
               
               return (
               <div
@@ -354,7 +354,7 @@ export default function PolicyManagerHomePage() {
                       <span
                         onClick={(e) => {
                           e.stopPropagation()
-                          handleDelete(policy.id!)
+                          handleDelete(Number(policy.id!))
                         }}
                         style={{
                           cursor: 'pointer',

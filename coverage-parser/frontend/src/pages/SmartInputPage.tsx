@@ -1434,7 +1434,7 @@ export default function SmartInputPage() {
         // 计算新的保障结束年龄
           const newCoverageEndAge = currentPolicyInfo.coverageEndYear === 'lifetime' 
           ? 150 // 终身假设到150岁
-            : currentPolicyInfo.coverageEndYear - currentPolicyInfo.birthYear
+            : Number(currentPolicyInfo.coverageEndYear) - currentPolicyInfo.birthYear
         
           console.log(`[保存合同] 新的保障结束年龄: ${newCoverageEndAge}岁 (保障结束年份: ${currentPolicyInfo.coverageEndYear})`)
         
@@ -1552,10 +1552,10 @@ export default function SmartInputPage() {
       }
 
       if (editId) {
-        await editPolicy(parseInt(editId), policyData)
+        await editPolicy(parseInt(editId), policyData as any)
         message.success('更新成功！')
       } else {
-        await addPolicy(policyData)
+        await addPolicy(policyData as any)
         message.success('保存成功！')
       }
       
