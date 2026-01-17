@@ -45,14 +45,21 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       type: 'divider' as const,
     },
     {
-      key: '/products',
-      icon: <DatabaseOutlined />,
-      label: '保险产品库',
-    },
-    {
-      key: '/coverage-library',
-      icon: <BookOutlined />,
-      label: '责任库管理',
+      key: 'admin-group',
+      label: '管理员专区',
+      type: 'group' as const,
+      children: [
+        {
+          key: '/products',
+          icon: <DatabaseOutlined />,
+          label: '保险产品库',
+        },
+        {
+          key: '/coverage-library',
+          icon: <BookOutlined />,
+          label: '责任库管理',
+        },
+      ]
     },
   ];
 

@@ -63,3 +63,25 @@
   color: inherit;
 }
 
+/* 分隔线样式 */
+.sidebar-menu .ant-menu-item-divider {
+  margin: 16px 0 8px 0;
+  background: hsl(210 20% 94%);
+}
+
+/* 管理员专区分组样式 */
+.sidebar-menu .ant-menu-item-group-title {
+  padding: 12px 16px 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: hsl(220 10% 50%);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+}
+
+/* 管理员专区的菜单项 */
+.sidebar-menu .ant-menu-item-group-list .ant-menu-item {
+  padding-left: 16px !important;
+}
+

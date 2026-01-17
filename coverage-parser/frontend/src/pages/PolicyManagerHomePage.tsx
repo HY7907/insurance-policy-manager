@@ -315,21 +315,21 @@ export default function PolicyManagerHomePage() {
                     {/* 左侧：保险名称 + 类型标签 */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 600, color: '#333' }}>
-                        {policy.productName}
-                      </h3>
-                      <span style={{
-                        background: '#f0f8fc',
-                        color: '#01BCD6',
-                        padding: '4px 12px',
-                        borderRadius: '12px',
-                        fontSize: '12px',
-                        fontWeight: 600,
+                    {policy.productName}
+                  </h3>
+                  <span style={{
+                    background: '#f0f8fc',
+                    color: '#01BCD6',
+                    padding: '4px 12px',
+                    borderRadius: '12px',
+                    fontSize: '12px',
+                    fontWeight: 600,
                         whiteSpace: 'nowrap',
                         lineHeight: '1.5',
                         display: 'inline-block'
-                      }}>
-                        {POLICY_TYPE_MAP[policy.policyType] || policy.policyType}
-                      </span>
+                  }}>
+                    {POLICY_TYPE_MAP[policy.policyType] || policy.policyType}
+                  </span>
                     </div>
                     
                     {/* 右侧：编辑删除图标按钮，与标签底部对齐 */}
